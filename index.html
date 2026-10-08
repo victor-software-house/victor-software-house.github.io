@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Victor Software House</title>
+<meta name="description" content="Victor Software House is an independent software studio in Brazil making handcrafted developer tools for working with AI agents.">
+<meta property="og:title" content="Victor Software House">
+<meta property="og:description" content="Handcrafted developer tools for working with AI agents.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://victor-software-house.com/">
+<meta property="og:image" content="https://victor-software-house.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="logo-dark.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /*
+   * The ctl family's palette and voice, taken to a page: cream and ink trade
+   * field and figure, rust is the one accent, Geist Mono Black carries names.
+   * Geist sets the reading text.
+   */
+  @font-face { font-family: "Geist Mono"; src: url(fonts/geist-mono.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "Geist"; src: url(fonts/geist.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
+
+  :root {
+    --field: #f3efe6;
+    --ink: #161616;
+    --muted: #6f675c;
+    --hair: #ddd6c8;
+    --rust: #c45c2a;
+    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --ease: cubic-bezier(.2, .8, .2, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --field: #161616;
+      --ink: #f3efe6;
+      --muted: #8d857a;
+      --hair: #2f2f2f;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { background: var(--field); hanging-punctuation: first; }
+
+  body {
+    margin: 0;
+    background: var(--field);
+    color: var(--ink);
+    font: 400 17px/1.6 var(--sans);
+    font-kerning: normal;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; border-radius: 6px; }
+  p { text-wrap: pretty; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 32px;
+  }
+  .logo { display: block; width: 40px; height: 40px; border-radius: 7.5px; }
+  .logo img { width: 100%; height: 100%; display: block; }
+  header nav { display: flex; gap: 32px; font: 500 14px/1 var(--mono); color: var(--muted); }
+  header nav a { transition: color .16s var(--ease); }
+  header nav a:hover { color: var(--ink); }
+
+  /* Hero: the house name, set the way a ctl banner sets a tool name. */
+  .hero { padding: 152px 0 0; }
+  h1 {
+    margin: 0;
+    font: 900 clamp(44px, 7.6vw, 92px)/.94 var(--mono);
+    letter-spacing: -.055em;
+    text-wrap: balance;
+  }
+  .tagline {
+    margin: 28px 0 0;
+    font: 500 clamp(16px, 1.6vw, 19px)/1.45 var(--mono);
+    color: var(--muted);
+    letter-spacing: -.01em;
+  }
+  .intro { margin: 36px 0 0; max-width: 33em; font-size: 19px; line-height: 1.55; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 42px;
+    padding: 0 18px;
+    border: 1px solid var(--muted);
+    border-radius: 10px;
+    font: 400 15px/1 var(--mono);
+    white-space: nowrap;
+    transition: border-color .16s var(--ease);
+  }
+  .chip b { color: var(--rust); font-weight: 600; }
+  a.chip:hover { border-color: var(--ink); }
+  .hero .chip { margin-top: 40px; }
+
+  section { padding-top: 168px; }
+  h2 {
+    margin: 0;
+    font: 900 clamp(28px, 3.2vw, 36px)/1.05 var(--mono);
+    letter-spacing: -.045em;
+  }
+  .lead { margin: 18px 0 0; max-width: 36em; color: var(--muted); }
+
+  /* The ctl family: each tool as its README banner does it. */
+  .family { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 48px; }
+  .tool {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 4px 24px;
+    padding: 30px;
+    border: 1px solid var(--hair);
+    border-radius: 20px;
+    transition: border-color .16s var(--ease);
+  }
+  .tool:hover { border-color: var(--muted); }
+  .tool picture { grid-row: span 2; }
+  .tool img { width: 72px; height: 72px; display: block; }
+  .tool h3 { margin: 4px 0 0; font: 900 30px/1 var(--mono); letter-spacing: -.05em; }
+  .tool p { margin: 10px 0 0; font: 500 14px/1.5 var(--mono); color: var(--muted); }
+  .tool .chip { grid-column: 2; justify-self: start; margin-top: 22px; height: 38px; padding: 0 14px; font-size: 14px; border-color: var(--hair); }
+  .tool:hover .chip { border-color: var(--muted); }
+
+  /* Everything else, most active first. */
+  .more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 64px; margin-top: 40px; }
+  .more a { display: block; padding: 22px 0; border-top: 1px solid var(--hair); }
+  .more .top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .more .name { font: 700 17px/1.2 var(--mono); letter-spacing: -.03em; transition: color .16s var(--ease); }
+  .more a:hover .name { color: var(--rust); }
+  .more .lang { font: 400 13px/1 var(--mono); color: var(--muted); }
+  .more p { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+    margin-top: 168px;
+    padding: 28px 0 48px;
+    border-top: 1px solid var(--hair);
+    font: 400 13px/1 var(--mono);
+    color: var(--muted);
+  }
+  footer nav { display: flex; gap: 28px; }
+  footer a { transition: color .16s var(--ease); }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .family, .more { grid-template-columns: 1fr; }
+    .more { gap: 0; }
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 0 20px; }
+    header nav { gap: 20px; }
+    .hero { padding-top: 96px; }
+    .intro { font-size: 17px; }
+    .hero .chip { max-width: 100%; padding: 0 14px; font-size: 13px; }
+    section { padding-top: 120px; }
+    .tool { grid-template-columns: 56px minmax(0, 1fr); gap: 4px 18px; padding: 22px; }
+    .tool img { width: 56px; height: 56px; }
+    .tool h3 { font-size: 26px; }
+    .tool .chip { grid-column: 1 / -1; }
+    footer { margin-top: 120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="logo" href="/" aria-label="Victor Software House"><picture><source media="(prefers-color-scheme: dark)" srcset="logo.svg"><img src="logo-dark.svg" alt="" width="40" height="40"></picture></a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="https://github.com/victor-software-house">GitHub</a>
+      <a href="mailto:victor@victor-software-house.com">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="name">
+      <h1 id="name">Victor Software House</h1>
+      <p class="tagline">Handcrafted developer tools for working with AI agents.</p>
+      <p class="intro">An independent software studio in Brazil. We build with Claude and Claude&nbsp;Code every day, and publish the tools that work needs.</p>
+      <a class="chip" href="https://github.com/victor-software-house"><b>$</b> open github.com/victor-software-house</a>
+    </section>
+
+    <section id="work" aria-labelledby="family-title">
+      <h2 id="family-title">The ctl family</h2>
+      <p class="lead">Four Rust command-line tools on one chassis. Each does one job and renders the same result as pretty text, plain text, or JSON.</p>
+      <div class="family">
+        <a class="tool" href="https://github.com/victor-software-house/forkctl">
+          <picture><source media="(prefers-color-scheme: dark)" srcset="marks/forkctl.svg"><img src="marks/forkctl-dark.svg" alt="" width="72" height="72"></picture>
+          <h3>forkctl</h3>
+          <p>Downstream forks as audited StGit patch stacks.</p>
+          <span class="chip"><b>$</b> mise run fork status</span>
+        </a>
+        <a class="tool" href="https://github.com/victor-software-house/verctl">
+          <picture><source media="(prefers-color-scheme: dark)" srcset="marks/verctl.svg"><img src="marks/verctl-dark.svg" alt="" width="72" height="72"></picture>
+          <h3>verctl</h3>
+          <p>Version PRs from Changesets-format fragments. Any stack.</p>
+          <span class="chip"><b>$</b> mise run ver -- prepare</span>
+        </a>
+        <a class="tool" href="https://github.com/victor-software-house/ctl-core">
+          <picture><source media="(prefers-color-scheme: dark)" srcset="marks/ctl-core.svg"><img src="marks/ctl-core-dark.svg" alt="" width="72" height="72"></picture>
+          <h3>ctl-core</h3>
+          <p>Shared clap chassis for the *ctl CLIs. Not a command.</p>
+          <span class="chip"><b>$</b> cargo add ctl-core</span>
+        </a>
+        <a class="tool" href="https://github.com/victor-software-house/qctl">
+          <picture><source media="(prefers-color-scheme: dark)" srcset="marks/qctl.svg"><img src="marks/qctl-dark.svg" alt="" width="72" height="72"></picture>
+          <h3>qctl</h3>
+          <p>In-repo YAML work queues. One file, one active task.</p>
+          <span class="chip"><b>$</b> mise run q -- status</span>
+        </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="more-title">
+      <h2 id="more-title">More from the studio</h2>
+      <div class="more">
+        <a href="https://github.com/victor-software-house/unixd"><div class="top"><span class="name">unixd</span><span class="lang">Rust</span></div><p>Socket-activated per-user daemons, and a bounded on-disk cache in front of slow work.</p></a>
+        <a href="https://github.com/victor-software-house/hunk-history"><div class="top"><span class="name">hunk-history</span><span class="lang">TypeScript</span></div><p>Live Git history, commit review and inclusive ranges for the Hunk diff viewer.</p></a>
+        <a href="https://github.com/victor-software-house/exa-cli"><div class="top"><span class="name">exa-cli</span><span class="lang">TypeScript</span></div><p>An agent-friendly CLI for the Exa API, with a local SQLite request cache.</p></a>
+        <a href="https://github.com/victor-software-house/yamled"><div class="top"><span class="name">yamled</span><span class="lang">Rust</span></div><p>Format-preserving YAML edits: change what you meant, keep every other byte.</p></a>
+        <a href="https://github.com/victor-software-house/bun-release"><div class="top"><span class="name">bun-release</span><span class="lang">TypeScript</span></div><p>Public npm publishing with OIDC for Bun, as a small library.</p></a>
+        <a href="https://github.com/victor-software-house/reviewbench"><div class="top"><span class="name">reviewbench</span><span class="lang">TypeScript</span></div><p>An agent-controlled terminal review workbench built on OpenTUI.</p></a>
+        <a href="https://github.com/victor-software-house/herdr-restore-notice"><div class="top"><span class="name">herdr-restore-notice</span><span class="lang">TypeScript</span></div><p>Restore a Herdr workspace without waking every agent.</p></a>
+        <a href="https://github.com/victor-software-house/herdr-stash"><div class="top"><span class="name">herdr-stash</span><span class="lang">Rust</span></div><p>Stop a workspace's agents, keep their conversations, and restore it later.</p></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Victor Software House</span>
+    <nav aria-label="Footer">
+      <a href="mailto:victor@victor-software-house.com">victor@victor-software-house.com</a>
+      <a href="https://github.com/victor-software-house">GitHub</a>
+    </nav>
+  </footer>
+
+</div>
+</body>
+</html>
